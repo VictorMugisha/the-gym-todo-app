@@ -1,5 +1,5 @@
 import { nanoid } from "nanoid";
-import { useState } from "react";
+import { useRef, useEffect, useState } from "react";
 import { FaPlusCircle } from "react-icons/fa";
 import { TodoTypes } from "../types/TodoTypes";
 import { useTodoContext } from "../hooks/useTodoContext";
@@ -41,6 +41,14 @@ export default function TodoForm() {
         })
     }
 
+    const inputRef = useRef<HTMLInputElement>(null)
+
+    useEffect(() => {
+        if (inputRef.current) {
+            inputRef.current.focus()
+        }
+    }, [])
+
     return (
         <form
             className="w-full mb-8"
@@ -49,6 +57,7 @@ export default function TodoForm() {
             <div className="w-full border border-slate-300 rounded-[2.5rem] shadow-2xl shadow-black flex items-center justify-between py-3 px-6">
                 <input
                     type="text"
+                    ref={inputRef}
                     placeholder="Add todo..."
                     className="w-full placeholder:text-black outline-none text-xl"
                     value={formData?.todoTitle}
