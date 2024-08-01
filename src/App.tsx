@@ -20,7 +20,7 @@ export default function App() {
   }, [allTodos]);
 
   return (
-    <main className="flex flex-col items-center justify-center max-w-3xl mx-auto py-16 px-8 mt-8 border-slate-300 border">
+    <main className="flex flex-col items-center justify-center w-full max-w-3xl mx-auto py-16 px-8 mt-8 border-slate-300 border">
       <TodoContext.Provider value={{ allTodos, setAllTodos }}>
         <TodoBanner />
         <TodoForm />
