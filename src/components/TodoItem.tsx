@@ -42,7 +42,7 @@ export default function TodoItem({ todo }: TodoItemProps) {
                     onChange={handleCompleteTodo}
                 />
                 <p
-                    className="text-lg"
+                    className={`text-lg ${isCompleted ? 'line-through' : ''}`}
                 >
                     {todoTitle}
                 </p>
