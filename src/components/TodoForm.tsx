@@ -2,8 +2,11 @@ import { nanoid } from "nanoid";
 import { useState } from "react";
 import { FaPlusCircle } from "react-icons/fa";
 import { TodoTypes } from "../types/TodoTypes";
+import { useTodoContext } from "../hooks/useTodoContext";
 
 export default function TodoForm() {
+    const { setAllTodos } = useTodoContext()
+
     const [formData, setFormData] = useState<TodoTypes>({
         todoId: nanoid(),
         todoTitle: '',
@@ -15,14 +18,27 @@ export default function TodoForm() {
         setFormData(currentState => {
             return {
                 ...currentState,
-                 todoTitle: value
+                todoTitle: value
             }
         })
     }
 
     function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
         event.preventDefault()
-        alert(JSON.stringify(formData))
+        if (formData.todoTitle == '') {
+            alert("Todo must have a title!!")
+            return
+        }
+
+        setAllTodos(currentTodos => {
+            return [formData, ...currentTodos]
+        })
+
+        setFormData({
+            todoId: nanoid(),
+            todoTitle: '',
+            isCompleted: false
+        })
     }
 
     return (

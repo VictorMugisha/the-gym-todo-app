@@ -1,6 +1,11 @@
 import { FaTrash } from "react-icons/fa";
+import { TodoTypes } from "../types/TodoTypes";
 
-export default function TodoItem() {
+interface TodoItemProps {
+    todo: TodoTypes
+}
+
+export default function TodoItem({todo}: TodoItemProps) {
     return (
         <div className="flex items-center justify-between border-b border-red-100 pb-2">
             <div className="flex items-center gap-8">
@@ -12,7 +17,7 @@ export default function TodoItem() {
                 <p
                 className="text-lg"
                 >
-                    Todo Content
+                    {todo.todoTitle}
                 </p>
             </div>
             <button className="w-12 h-12 bg-red-100 flex items-center justify-center rounded-full">
