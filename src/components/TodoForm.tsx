@@ -1,18 +1,13 @@
 import { nanoid } from "nanoid";
 import { useState } from "react";
 import { FaPlusCircle } from "react-icons/fa";
-
-interface ITodo {
-    id: string;
-    title: string;
-    isComplete: boolean;
-}
+import { TodoTypes } from "../types/TodoTypes";
 
 export default function TodoForm() {
-    const [formData, setFormData] = useState<ITodo>({
-        id: nanoid(),
-        title: '',
-        isComplete: false
+    const [formData, setFormData] = useState<TodoTypes>({
+        todoId: nanoid(),
+        todoTitle: '',
+        isCompleted: false
     })
 
     function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
@@ -20,7 +15,7 @@ export default function TodoForm() {
         setFormData(currentState => {
             return {
                 ...currentState,
-                title: value
+                 todoTitle: value
             }
         })
     }
@@ -40,7 +35,7 @@ export default function TodoForm() {
                     type="text"
                     placeholder="Add todo..."
                     className="w-full placeholder:text-black outline-none text-xl"
-                    value={formData?.title}
+                    value={formData?.todoTitle}
                     onChange={handleChange}
                 />
                 <button>
