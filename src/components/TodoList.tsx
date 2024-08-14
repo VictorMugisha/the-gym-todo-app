@@ -1,8 +1,8 @@
 import TodoItem from "./TodoItem";
-import { useTodoContext } from "../hooks/useTodoContext";
+import { useSelector } from "react-redux";
 
 export default function TodoList() {
-    const { allTodos } = useTodoContext()
+    const allTodos = useSelector(state => state.todo.value)
     return (
         <div className="w-full mt-4 flex flex-col gap-1">
             {

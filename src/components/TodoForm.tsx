@@ -2,10 +2,12 @@ import { nanoid } from "nanoid";
 import { useRef, useEffect, useState } from "react";
 import { FaPlusCircle } from "react-icons/fa";
 import { TodoTypes } from "../types/TodoTypes";
-import { useTodoContext } from "../hooks/useTodoContext";
+import { useDispatch } from "react-redux";
+import { addTodo } from "../states/todo";
 
 export default function TodoForm() {
-    const { setAllTodos } = useTodoContext()
+
+    const dispatch = useDispatch()
 
     const [formData, setFormData] = useState<TodoTypes>({
         todoId: nanoid(),
@@ -30,9 +32,7 @@ export default function TodoForm() {
             return
         }
 
-        setAllTodos(currentTodos => {
-            return [formData, ...currentTodos]
-        })
+        dispatch(addTodo(formData))
 
         setFormData({
             todoId: nanoid(),

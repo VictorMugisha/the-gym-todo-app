@@ -1,34 +1,30 @@
 import { FaTrash } from "react-icons/fa";
 import { TodoTypes } from "../types/TodoTypes";
-import { useTodoContext } from "../hooks/useTodoContext";
 
 interface TodoItemProps {
     todo: TodoTypes
 }
 
 export default function TodoItem({ todo }: TodoItemProps) {
-    const {setAllTodos} = useTodoContext()
 
     const { todoTitle, todoId, isCompleted } = todo
     function handleDeleteTodo() {
-        setAllTodos(currentState => {
-            return currentState.filter(currentTodo => currentTodo.todoId !== todoId)
-        })
+        
     }
 
     function handleCompleteTodo() {
-        setAllTodos(currentState => {
-            return currentState.map(currentTodo => {
-                if (currentTodo.todoId === todoId) {
-                    return {
-                        ...currentTodo,
-                        isCompleted: !currentTodo.isCompleted
-                    }
-                } else {
-                    return currentTodo
-                }
-            })
-        })
+        // setAllTodos(currentState => {
+        //     return currentState.map(currentTodo => {
+        //         if (currentTodo.todoId === todoId) {
+        //             return {
+        //                 ...currentTodo,
+        //                 isCompleted: !currentTodo.isCompleted
+        //             }
+        //         } else {
+        //             return currentTodo
+        //         }
+        //     })
+        // })
     }
 
     return (
