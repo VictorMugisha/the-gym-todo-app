@@ -1,7 +1,7 @@
 import { FaTrash } from "react-icons/fa";
 import { TodoTypes } from "../types/TodoTypes";
 import { useDispatch } from "react-redux";
-import { completeTodo } from "../store/todos/todosSlice";
+import { completeTodo, deleteTodo } from "../store/todos/todosSlice";
 
 interface TodoItemProps {
     todo: TodoTypes
@@ -11,11 +11,9 @@ export default function TodoItem({ todo }: TodoItemProps) {
     const dispatch = useDispatch()
 
     const { todoTitle, todoId, isCompleted } = todo
-    // function handleDeleteTodo() {
-    //     setAllTodos(currentState => {
-    //         return currentState.filter(currentTodo => currentTodo.todoId !== todoId)
-    //     })
-    // }
+    function handleDeleteTodo() {
+        dispatch(deleteTodo(todoId))
+    }
 
     function handleCompleteTodo() {
         dispatch(completeTodo(todoId))
@@ -39,7 +37,7 @@ export default function TodoItem({ todo }: TodoItemProps) {
             </div>
             <button
                 className="w-12 h-12 bg-red-100 flex items-center justify-center rounded-full"
-                onClick={() => {}}
+                onClick={handleDeleteTodo}
             >
                 <FaTrash className="text-red-500 text-xl" />
             </button>
