@@ -10,10 +10,8 @@ type TodoState = {
     value: TodosType[]
 }
 
-const initialValue: TodosType[] = JSON.parse(localStorage.getItem("todos") || "[]"); 
-
 const initialState: TodoState =  {
-    value: initialValue,
+    value: [],
 }
 
 export const todosSlice = createSlice({
@@ -22,7 +20,6 @@ export const todosSlice = createSlice({
     reducers: {
         addTodo: (state, action: PayloadAction<TodosType>) => {
             state.value = [...state.value, action.payload]
-            localStorage.setItem("todos", JSON.stringify(state.value))
         },
         completeTodo: (state, action: PayloadAction<string>) => {
             const newTodos = state.value.map(todo => {
@@ -36,12 +33,10 @@ export const todosSlice = createSlice({
                 }
             })
             state.value = newTodos
-            localStorage.setItem("todos", JSON.stringify(state.value))
         },
         deleteTodo: (state, action: PayloadAction<string>) => {
             const filteredTodos = state.value.filter(todo => todo.todoId !== action.payload)
             state.value = filteredTodos
-            localStorage.setItem("todos", JSON.stringify(state.value))
         }
     }
 })
